@@ -23,7 +23,12 @@ public class Intersection {
 
     public Intersection[] getConnectedIntersections()
     {
-        Intersection[] intersections = (Intersection[]) connectedIntersections.toArray();
+        Object[] intersectionsObj = connectedIntersections.toArray();
+        Intersection[] intersections = new Intersection[intersectionsObj.length];
+        for (int i = 0; i < intersectionsObj.length; i++)
+        {
+            intersections[i] = (Intersection) intersectionsObj[i];
+        }
         return intersections;
     }
 
