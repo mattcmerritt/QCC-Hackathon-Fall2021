@@ -6,28 +6,82 @@ public class App {
         ExampleMap map = new ExampleMap();
         Stack<LinkedList<Intersection>> paths = new Stack<LinkedList<Intersection>>();
         LinkedList<Intersection> start = new LinkedList<Intersection>();
-        start.add(map.getRestaurant());
-        paths.push(start);
 
         // set a random target
         // TODO: make a house
         Intersection target = (House) map.getHouses()[(int) (Math.random() * map.getHouses().length)];
-        System.out.println("Destination: " + target);
+        System.out.println("Destination 1: " + target);
+
+        Intersection target2 = (House) map.getHouses()[(int) (Math.random() * map.getHouses().length)];
+        System.out.println("Destination 2: " + target2);
+
+        System.out.println();
 
         LinkedList<LinkedList<Intersection>> validPaths = new LinkedList<LinkedList<Intersection>>();
+
+        start.add(map.getRestaurant());
+        paths.push(start);
 
         while (!paths.empty())
         {
             findAllPaths(paths, target, validPaths);
         }
 
-        System.out.println(validPaths.size() + " paths found.");
+        ListAndTime shortestPath12 = findShortestPath(validPaths, map);
 
-        ListAndTime shortestPath = findShortestPath(validPaths, map);
+        paths.push(shortestPath12.list);
+        validPaths = new LinkedList<LinkedList<Intersection>>();
 
-        printList(shortestPath.list);
-        System.out.println("Duration of Trip: " + shortestPath.time + " minutes.");
+        while (!paths.empty())
+        {
+            findAllPaths(paths, target2, validPaths);
+        }
 
+        System.out.println(validPaths.size() + " paths found from " + target + " to " + target2 + ".");
+        shortestPath12 = findShortestPath(validPaths, map);
+
+        //printList(shortestPath12.list);
+        //System.out.println("Duration of Trip: " + shortestPath12.time + " minutes.");
+
+        // SOLVING BACKWARDS
+        start = new LinkedList<Intersection>();
+        start.add(map.getRestaurant());
+        paths.push(start);
+
+        while (!paths.empty())
+        {
+            findAllPaths(paths, target, validPaths);
+        }
+
+        ListAndTime shortestPath21 = findShortestPath(validPaths, map);
+
+        paths.push(shortestPath21.list);
+        validPaths = new LinkedList<LinkedList<Intersection>>();
+
+        while (!paths.empty())
+        {
+            findAllPaths(paths, target, validPaths);
+        }
+
+        System.out.println(validPaths.size() + " paths found from " + target2 + " to " + target + ".");
+        shortestPath21 = findShortestPath(validPaths, map);
+
+        //printList(shortestPath21.list);
+        //System.out.println("Duration of Trip: " + shortestPath21.time + " minutes.");
+
+        System.out.println();
+        System.out.println("Final route: ");
+
+        if (shortestPath12.time < shortestPath21.time)
+        {
+            printList(shortestPath12.list, map);
+            System.out.println("Duration of Trip: " + shortestPath12.time + " minutes.");
+        }
+        else 
+        {
+            printList(shortestPath12.list, map);
+            System.out.println("Duration of Trip: " + shortestPath21.time + " minutes.");
+        }
     }
 
     public static void findAllPaths(Stack<LinkedList<Intersection>> paths, Intersection target, LinkedList<LinkedList<Intersection>> validPaths) {
@@ -100,11 +154,11 @@ public class App {
         return new ListAndTime(shortest, minTime);
     }
 
-    public static void printList(LinkedList<Intersection> path)
+    public static void printList(LinkedList<Intersection> path, Map map)
     {
-        for (Intersection i : path)
+        for (int i = 0; i < path.size() - 1; i++)
         {
-            System.out.println(i);
+            System.out.println("\t Travel down " + map.getRoad(path.get(i), path.get(i+1)));
         }
     }
 }

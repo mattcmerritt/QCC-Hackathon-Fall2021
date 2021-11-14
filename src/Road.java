@@ -3,7 +3,7 @@ public class Road {
     private double distance, travelDuration;
 
     public Road(String name, double distance, double travelDuration) {
-        this.name = name;
+        this.name = name.toUpperCase();
         this.distance = distance;
         this.travelDuration = travelDuration;
     }
