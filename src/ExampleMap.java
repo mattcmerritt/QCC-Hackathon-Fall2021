@@ -1,9 +1,23 @@
 import java.util.ArrayList;
 
-public class ExampleMap {
+public class ExampleMap implements Map {
     
     private ArrayList<Intersection> intersections = new ArrayList<Intersection>();
     private RoadMap roadMap = new RoadMap();
+    private Intersection restaurant;
+
+    public Intersection[] getIntersections() {
+        Intersection[] result = (Intersection[]) intersections.toArray();
+        return result;
+    }
+
+    public Intersection getRestaurant() {
+        return restaurant;
+    }
+
+    public Road getRoad(Intersection start, Intersection end) {
+        return roadMap.fetchRoad(start, end);
+    }
 
     public ExampleMap(){
         Intersection intersectionR = new Intersection("R");

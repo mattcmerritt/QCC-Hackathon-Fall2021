@@ -1,13 +1,16 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Intersection {
     
     private ArrayList<Intersection> connectedIntersections;
     private String name;
+    private Hashtable<Integer, Boolean> paths;
 
     public Intersection(String name)
     {
         connectedIntersections = new ArrayList<Intersection>();
+        paths = new Hashtable<Integer, Boolean>();
     }
 
     public void addIntersection(Intersection i, RoadMap roadMap, String roadName, double distance, double travelDistance)
@@ -27,5 +30,15 @@ public class Intersection {
     public void connectBackwards(Intersection i)
     {
         connectedIntersections.add(i);
+    }
+    
+    public void visit(int path)
+    {
+        paths.put(path, true);
+    }
+
+    public boolean checkVisited(int path)
+    {
+        return paths.get(path) != null && !paths.get(path);
     }
 }
