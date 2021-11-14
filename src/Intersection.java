@@ -53,4 +53,9 @@ public class Intersection {
     {
         return "Intersection: " + name;
     }
+
+    public String getName()
+    {
+        return name;
+    }
 }

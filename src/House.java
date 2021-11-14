@@ -4,4 +4,10 @@ public class House extends Intersection{
     {
         super(name);
     }
+
+    @Override
+    public String toString()
+    {
+        return "House: " + getName();
+    }
 }
