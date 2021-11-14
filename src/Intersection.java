@@ -46,4 +46,10 @@ public class Intersection {
     {
         return paths.get(path) != null && !paths.get(path);
     }
+
+    @Override
+    public String toString()
+    {
+        return "Intersection: " + name;
+    }
 }

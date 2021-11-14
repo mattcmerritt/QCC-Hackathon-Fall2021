@@ -19,4 +19,10 @@ public class Road {
     public double getTravelDuration() {
         return travelDuration;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Road: " + name;
+    }
 }
