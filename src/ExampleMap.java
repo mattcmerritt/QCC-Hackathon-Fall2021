@@ -74,6 +74,22 @@ public class ExampleMap implements Map {
 
         // Intersection G
 
+        intersections.add(intersectionR);
+        intersections.add(intersectionA);
+        intersections.add(intersectionB);
+        intersections.add(intersectionC);
+        intersections.add(intersectionD);
+        intersections.add(intersectionE);
+        intersections.add(intersectionF);
+        intersections.add(intersectionG);
+        intersections.add(houseAB);
+        intersections.add(houseBC);
+        intersections.add(houseCD);
+        intersections.add(houseAE);
+        intersections.add(houseEG);
+        intersections.add(houseBG);
+
+        restaurant = intersectionR;
     }
 
 
