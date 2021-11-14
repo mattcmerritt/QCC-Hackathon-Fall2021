@@ -17,7 +17,7 @@ public class Intersection {
     public void addIntersection(Intersection i, RoadMap roadMap, String roadName, double distance, double travelDistance)
     {
         connectedIntersections.add(i);
-        Road newRoad = new Road(roadName, 0, 5);
+        Road newRoad = new Road(roadName, 0, travelDistance);
         i.connectBackwards(this);
         roadMap.addRoad(this, i, newRoad);
     }
