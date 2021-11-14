@@ -23,6 +23,11 @@ public class App {
 
         System.out.println(validPaths.size() + " paths found.");
 
+        ListAndTime shortestPath = findShortestPath(validPaths, map);
+
+        printList(shortestPath.list);
+        System.out.println("Duration of Trip: " + shortestPath.time + " minutes.");
+
     }
 
     public static void findAllPaths(Stack<LinkedList<Intersection>> paths, Intersection target, LinkedList<LinkedList<Intersection>> validPaths) {
@@ -71,6 +76,35 @@ public class App {
         else 
         {
             System.out.println("NO PATHS FOUND AT ALL");
+        }
+    }
+
+    public static ListAndTime findShortestPath(LinkedList<LinkedList<Intersection>> validPaths, Map map)
+    {
+        double minTime = Double.MAX_VALUE;
+        LinkedList<Intersection> shortest = null;
+        for (LinkedList<Intersection> path : validPaths)
+        {
+            double currentTime = 0;
+            for (int i = 0; i < path.size() - 1; i++)
+            {
+                currentTime += map.getRoad(path.get(i), path.get(i+1)).getTravelDuration();
+            }
+
+            if (currentTime < minTime)
+            {
+                minTime = currentTime;
+                shortest = path;
+            }
+        }
+        return new ListAndTime(shortest, minTime);
+    }
+
+    public static void printList(LinkedList<Intersection> path)
+    {
+        for (Intersection i : path)
+        {
+            System.out.println(i);
         }
     }
 }
