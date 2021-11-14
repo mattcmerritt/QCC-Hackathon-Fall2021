@@ -6,4 +6,8 @@ public class RoadMap {
     public Road fetchRoad(Intersection start, Intersection end) {
         return RoadDictionary.get(new RoadKey(start, end));
     }
+
+    public void addRoad(Intersection start, Intersection end, Road road) {
+        RoadDictionary.put(new RoadKey(start, end), road);
+    }
 }
