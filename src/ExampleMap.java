@@ -6,84 +6,61 @@ public class ExampleMap {
     private RoadMap roadMap = new RoadMap();
 
     public ExampleMap(){
-        Intersection intersectionR = new Intersection();
-        Intersection intersectionA = new Intersection();
-        Intersection intersectionB = new Intersection();
-        Intersection intersectionC = new Intersection();
-        Intersection intersectionD = new Intersection();
-        Intersection intersectionE = new Intersection();
-        Intersection intersectionF = new Intersection();
-        Intersection intersectionG = new Intersection();
+        Intersection intersectionR = new Intersection("R");
+        Intersection intersectionA = new Intersection("A");
+        Intersection intersectionB = new Intersection("B");
+        Intersection intersectionC = new Intersection("C");
+        Intersection intersectionD = new Intersection("D");
+        Intersection intersectionE = new Intersection("E");
+        Intersection intersectionF = new Intersection("F");
+        Intersection intersectionG = new Intersection("G");
+        House houseAB = new House("AB");
+        House houseBC = new House("BC");
+        House houseCD = new House("CD");
+        House houseAE = new House("AE");
+        House houseEG = new House("EG");
+        House houseBG = new House("BG");
 
-        // Intersection R Connected
-        intersectionR.addIntersection(intersectionA);
-        intersectionR.addIntersection(intersectionB);
-        intersectionR.addIntersection(intersectionG);
+        // Intersection R 
+        intersectionR.addIntersection(intersectionA, roadMap, "ra", 0, 5);
+        intersectionR.addIntersection(intersectionB, roadMap, "rb", 0, 5);
+        intersectionR.addIntersection(intersectionG, roadMap, "rg", 0, 5);
 
         // Intersection A
-        intersectionA.addIntersection(intersectionR);
-        intersectionA.addIntersection(intersectionB);
-        intersectionA.addIntersection(intersectionC);
-        intersectionA.addIntersection(intersectionD);
-        intersectionA.addIntersection(intersectionE);
+
+        intersectionA.addIntersection(houseAB, roadMap, "ab", 0, 5);
+        houseAB.addIntersection(intersectionB, roadMap, "ab", 0, 5);
+        intersectionA.addIntersection(intersectionC, roadMap, "ac", 0, 5);
+        intersectionA.addIntersection(intersectionD, roadMap, "ad", 0, 5);
+        intersectionA.addIntersection(houseAE, roadMap, "ae", 0, 5);
+        houseAE.addIntersection(intersectionE, roadMap, "ae", 0, 5);
 
         // Intersection B
-        intersectionB.addIntersection(intersectionA);
-        intersectionB.addIntersection(intersectionC);
-        intersectionB.addIntersection(intersectionR);
-        intersectionB.addIntersection(intersectionG);
+
+        intersectionB.addIntersection(houseBC, roadMap, "bc", 0, 5);
+        houseBC.addIntersection(intersectionC, roadMap, "bc", 0, 5);
+        intersectionB.addIntersection(houseBG, roadMap, "bg", 0, 5);
+        houseBG.addIntersection(intersectionG, roadMap, "bg", 0, 5);
 
         // Intersection C
-        intersectionC.addIntersection(intersectionA);
-        intersectionC.addIntersection(intersectionB);
-        intersectionC.addIntersection(intersectionD);
+
+        intersectionC.addIntersection(houseCD, roadMap, "cd", 0, 5);
+        houseCD.addIntersection(intersectionD, roadMap, "cd", 0, 5);
 
         // Intersection D
-        intersectionC.addIntersection(intersectionA);
-        intersectionC.addIntersection(intersectionC);
 
         // Intersection E
-        intersectionE.addIntersection(intersectionA);
-        intersectionE.addIntersection(intersectionF);
-        intersectionE.addIntersection(intersectionG);
+
+        intersectionE.addIntersection(intersectionF, roadMap, "ef", 0, 5);
+        intersectionE.addIntersection(houseEG, roadMap, "eg", 0, 5);
+        houseEG.addIntersection(intersectionG, roadMap, "eg", 0, 5);
 
         // Intersection F
-        intersectionF.addIntersection(intersectionE);
-        intersectionF.addIntersection(intersectionG);
+
+        intersectionF.addIntersection(intersectionG, roadMap, "fg", 0, 5);
 
         // Intersection G
-        intersectionG.addIntersection(intersectionF);
-        intersectionG.addIntersection(intersectionE);
-        intersectionG.addIntersection(intersectionR);
-        intersectionG.addIntersection(intersectionB);
 
-        Road ra = new Road("ra", 0, 5);
-        Road rb = new Road("rb", 0, 5);
-        Road rg = new Road("rg", 0, 5);
-        Road ab = new Road("ab", 0, 5);
-        Road ac = new Road("ac", 0, 5);
-        Road bg = new Road("bg", 0, 5);
-        Road cb = new Road("cb", 0, 5);
-        Road dc = new Road("dc", 0, 5);
-        Road da = new Road("da", 0, 5);
-        Road ae = new Road("ae", 0, 5);
-        Road ef = new Road("ef", 0, 5);
-        Road eg = new Road("eg", 0, 5);
-        Road fg = new Road("fg", 0, 5);
-
-        roadMap.addRoad(intersectionR, intersectionA, ra);
-        roadMap.addRoad(intersectionR, intersectionB, rb);
-        roadMap.addRoad(intersectionR, intersectionG, rg);
-        roadMap.addRoad(intersectionA, intersectionB, ab);
-        roadMap.addRoad(intersectionA, intersectionC, ac);
-        roadMap.addRoad(intersectionB, intersectionG, bg);
-        roadMap.addRoad(intersectionC, intersectionB, cb);
-        roadMap.addRoad(intersectionD, intersectionC, dc);
-        roadMap.addRoad(intersectionD, intersectionA, da);
-        roadMap.addRoad(intersectionA, intersectionE, ae);
-        roadMap.addRoad(intersectionE, intersectionF, ef);
-        roadMap.addRoad(intersectionE, intersectionG, eg);
-        roadMap.addRoad(intersectionF, intersectionG, fg);
     }
 
 
