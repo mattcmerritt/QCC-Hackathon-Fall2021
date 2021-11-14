@@ -16,7 +16,10 @@ public class App {
 
         LinkedList<LinkedList<Intersection>> validPaths = new LinkedList<LinkedList<Intersection>>();
 
-        findShortestPath(paths, target, validPaths);
+        while (!paths.empty())
+        {
+            findShortestPath(paths, target, validPaths);
+        }
 
         System.out.println(validPaths.size());
     }
@@ -43,19 +46,26 @@ public class App {
                     for (Intersection connected : current.getConnectedIntersections())
                     {
                         LinkedList<Intersection> copy = new LinkedList<Intersection>();
+                        boolean repeating = false;
                         for (Intersection i : currentPath)
                         {
-                            if (i == connected)
+                            if (!repeating)
                             {
-                                // repeating path terminated
-                                break;
-                            }
-                            else
-                            {
-                                copy.add(i);
+                                if (i == connected)
+                                {
+                                    repeating = true;
+                                }
+                                else
+                                {
+                                    copy.add(i);
+                                }
                             }
                         }
-                        paths.push(copy);
+                        if (!repeating)
+                        {
+                            copy.add(connected);
+                            paths.push(copy);
+                        } 
                     }
                 }
             }
