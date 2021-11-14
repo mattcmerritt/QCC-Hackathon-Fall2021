@@ -1,0 +1,14 @@
+.classpath
+.settings/
+.project
+bin/
+*.class
+out/
+.idea/
+*.iml
+.DS_STORE
+.env
+
+# VS Code
+.vscode/
+lib/
