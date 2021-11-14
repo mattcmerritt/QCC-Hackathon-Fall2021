@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class App {
@@ -7,13 +8,43 @@ public class App {
         Stack<LinkedList<Intersection>> paths = new Stack<LinkedList<Intersection>>();
         LinkedList<Intersection> start = new LinkedList<Intersection>();
 
-        // set a random target
-        // TODO: make a house
-        Intersection target = (House) map.getHouses()[(int) (Math.random() * map.getHouses().length)];
-        System.out.println("Destination 1: " + target);
+        Scanner scan = new Scanner(System.in);
+        Object[] allHouses = map.getHouses();
+        Intersection target = null; // destination
 
-        Intersection target2 = (House) map.getHouses()[(int) (Math.random() * map.getHouses().length)];
-        System.out.println("Destination 2: " + target2);
+        // keep going until a valid house is input
+        while(target == null) {
+            System.out.println("Which house would you like to deliver to?");
+            String houseID = scan.nextLine();
+            
+            for(Object house : allHouses) {
+                // find house in list of all houses
+                if(((House) house).toString().contains(houseID.trim().toUpperCase())) {
+                    target = (Intersection) house;
+                }
+            }
+            if(target == null) {
+                System.out.println("That house could not be found. Please try again.");
+            }
+        }
+
+        Intersection target2 = null; // destination
+
+        // keep going until a valid house is input
+        while(target2 == null) {
+            System.out.println("Which house would you like to deliver to?");
+            String houseID = scan.nextLine();
+            
+            for(Object house : allHouses) {
+                // find house in list of all houses
+                if(((House) house).toString().contains(houseID.trim().toUpperCase())) {
+                    target2 = (Intersection) house;
+                }
+            }
+            if(target2 == null) {
+                System.out.println("That house could not be found. Please try again.");
+            }
+        }
 
         System.out.println();
 
@@ -82,6 +113,8 @@ public class App {
             printList(shortestPath12.list, map);
             System.out.println("Duration of Trip: " + shortestPath21.time + " minutes.");
         }
+        // TODO: ask if they want to repeat, and then recurse main after closing scanner
+        scan.close();
     }
 
     public static void findAllPaths(Stack<LinkedList<Intersection>> paths, Intersection target, LinkedList<LinkedList<Intersection>> validPaths) {
