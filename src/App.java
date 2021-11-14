@@ -11,8 +11,8 @@ public class App {
 
         // set a random target
         // TODO: make a house
-        Intersection target = (Intersection) map.getIntersections()[(int) (Math.random() * map.getIntersections().length)];
-        System.out.println(target);
+        Intersection target = (House) map.getHouses()[(int) (Math.random() * map.getHouses().length)];
+        System.out.println("Destination: " + target);
 
         LinkedList<LinkedList<Intersection>> validPaths = new LinkedList<LinkedList<Intersection>>();
 
