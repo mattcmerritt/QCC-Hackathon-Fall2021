@@ -1,5 +1,5 @@
 public class RoadKey {
-    private Intersection start, end;
+    private final Intersection start, end;
 
     public RoadKey(Intersection start, Intersection end) {
         this.start = start;
@@ -7,7 +7,9 @@ public class RoadKey {
     }
 
     // override equals to make road keys work from either side
-    public boolean equals(RoadKey newRK) {
+    @Override
+    public boolean equals(Object obj) {
+        RoadKey newRK = (RoadKey) obj;
         return (start.equals(newRK.getStart()) && end.equals(newRK.getEnd())) ||
             (start.equals(newRK.getEnd()) && end.equals(newRK.getStart()));
     }
@@ -18,5 +20,11 @@ public class RoadKey {
 
     public Intersection getEnd() {
         return end;
+    }
+
+    // override hashing function
+    @Override
+    public int hashCode() {
+        return start.hashCode() * end.hashCode();
     }
 }
