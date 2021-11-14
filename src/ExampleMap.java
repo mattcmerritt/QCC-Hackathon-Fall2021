@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class ExampleMap implements Map {
     
     private ArrayList<Intersection> intersections = new ArrayList<Intersection>();
+    private ArrayList<House> houses = new ArrayList<House>();
     private RoadMap roadMap = new RoadMap();
     private Intersection restaurant;
 
@@ -16,6 +17,10 @@ public class ExampleMap implements Map {
 
     public Road getRoad(Intersection start, Intersection end) {
         return roadMap.fetchRoad(start, end);
+    }
+
+    public Object[] getHouses() {
+        return houses.toArray();
     }
 
     public ExampleMap(){
@@ -33,6 +38,14 @@ public class ExampleMap implements Map {
         House houseAE = new House("AE");
         House houseEG = new House("EG");
         House houseBG = new House("BG");
+
+        // add all houses to house list
+        houses.add(houseAB);
+        houses.add(houseBC);
+        houses.add(houseCD);
+        houses.add(houseAE);
+        houses.add(houseEG);
+        houses.add(houseBG);
 
         // Intersection R 
         intersectionR.addIntersection(intersectionA, roadMap, "ra", 0, 7);
