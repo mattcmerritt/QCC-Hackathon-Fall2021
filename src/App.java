@@ -11,32 +11,44 @@ public class App {
 
         // set a random target
         // TODO: make a house
-        Intersection target = map.getIntersections()[(int) (Math.random() * map.getIntersections().length)];
+        Intersection target = (Intersection) map.getIntersections()[(int) (Math.random() * map.getIntersections().length)];
+        System.out.println(target);
 
-        findShortestPath(paths, target);
+        LinkedList<Intersection> validPaths = new LinkedList<Intersection>();
+
+        findShortestPath(paths, target, validPaths);
+
+        System.out.println(validPaths);
     }
 
-    public static void findShortestPath(Stack<LinkedList<Intersection>> paths, Intersection target) {
+    public static void findShortestPath(Stack<LinkedList<Intersection>> paths, Intersection target, LinkedList<Intersection> validPaths) {
         LinkedList<Intersection> currentPath = paths.pop();
         Intersection current = currentPath.peekLast();
         if (current != null)
         {
-            for (Intersection connected : current.getConnectedIntersections())
+            if (current == target)
             {
-                LinkedList<Intersection> copy = new LinkedList<Intersection>();
-                for (Intersection i : currentPath)
+                // add to list of valid paths
+            }
+            else
+            {
+                for (Intersection connected : current.getConnectedIntersections())
                 {
-                    if (i == connected)
+                    LinkedList<Intersection> copy = new LinkedList<Intersection>();
+                    for (Intersection i : currentPath)
                     {
-                        // repeating path terminated
-                        break;
+                        if (i == connected)
+                        {
+                            // repeating path terminated
+                            break;
+                        }
+                        else
+                        {
+                            copy.add(i);
+                        }
                     }
-                    else
-                    {
-                        copy.add(i);
-                    }
+                    paths.push(copy);
                 }
-                paths.push(copy);
             }
         }
         else 

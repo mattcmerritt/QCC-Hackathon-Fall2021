@@ -6,9 +6,8 @@ public class ExampleMap implements Map {
     private RoadMap roadMap = new RoadMap();
     private Intersection restaurant;
 
-    public Intersection[] getIntersections() {
-        Intersection[] result = (Intersection[]) intersections.toArray();
-        return result;
+    public Object[] getIntersections() {
+        return intersections.toArray();
     }
 
     public Intersection getRestaurant() {
