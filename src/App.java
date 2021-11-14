@@ -18,60 +18,54 @@ public class App {
 
         while (!paths.empty())
         {
-            findShortestPath(paths, target, validPaths);
+            findAllPaths(paths, target, validPaths);
         }
 
-        System.out.println(validPaths.size());
+        System.out.println(validPaths.size() + " paths found.");
+
     }
 
-    public static void findShortestPath(Stack<LinkedList<Intersection>> paths, Intersection target, LinkedList<LinkedList<Intersection>> validPaths) {
+    public static void findAllPaths(Stack<LinkedList<Intersection>> paths, Intersection target, LinkedList<LinkedList<Intersection>> validPaths) {
         if (!paths.empty()) 
         {
-            LinkedList<Intersection> currentPath = paths.pop();
-            Intersection current = currentPath.peekLast();
-            if (current != null)
+        LinkedList<Intersection> currentPath = paths.pop();
+        Intersection current = currentPath.peekLast();
+            if (current == target)
             {
-                if (current == target)
+                // add to list of valid paths
+                LinkedList<Intersection> copy = new LinkedList<Intersection>();
+                for (Intersection i : currentPath)
                 {
-                    // add to list of valid paths
+                    copy.add(i);
+                }
+                validPaths.add(copy);
+            }
+            else
+            {
+                for (Intersection connected : current.getConnectedIntersections())
+                {
                     LinkedList<Intersection> copy = new LinkedList<Intersection>();
+                    boolean repeating = false;
                     for (Intersection i : currentPath)
                     {
-                        copy.add(i);
-                    }
-                    validPaths.add(copy);
-                }
-                else
-                {
-                    for (Intersection connected : current.getConnectedIntersections())
-                    {
-                        LinkedList<Intersection> copy = new LinkedList<Intersection>();
-                        boolean repeating = false;
-                        for (Intersection i : currentPath)
-                        {
-                            if (!repeating)
-                            {
-                                if (i == connected)
-                                {
-                                    repeating = true;
-                                }
-                                else
-                                {
-                                    copy.add(i);
-                                }
-                            }
-                        }
                         if (!repeating)
                         {
-                            copy.add(connected);
-                            paths.push(copy);
-                        } 
+                            if (i == connected)
+                            {
+                                repeating = true;
+                            }
+                            else
+                            {
+                                copy.add(i);
+                            }
+                        }
                     }
+                    if (!repeating)
+                    {
+                        copy.add(connected);
+                        paths.push(copy);
+                    } 
                 }
-            }
-            else 
-            {
-                System.out.println("NO PATHS FOUND");
             }
         }
         else 
