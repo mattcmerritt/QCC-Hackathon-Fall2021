@@ -11,6 +11,7 @@ public class Intersection {
     {
         connectedIntersections = new ArrayList<Intersection>();
         paths = new Hashtable<Integer, Boolean>();
+        this.name = name;
     }
 
     public void addIntersection(Intersection i, RoadMap roadMap, String roadName, double distance, double travelDistance)
